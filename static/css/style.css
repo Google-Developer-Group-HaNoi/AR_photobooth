@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#screenshot {
+  border-radius: 50%;
+  width: 25%;
+  max-width: 48px;
+  aspect-ratio: 1;
+  position: fixed;
+  z-index: 2;
+  bottom: 2rem;
+  cursor: pointer;
+  right: 50dvw;
+  left: 50dvw;
+  border: 5px solid;
+  transform: translateX(-50%);
+}

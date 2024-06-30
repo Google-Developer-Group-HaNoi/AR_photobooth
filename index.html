@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google I/O Extended Hanoi 2024 | AR Photobooth</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="../static/js/build/mindar-image-aframe.prod.js"></script>
+    <script src="../static/js/build/aframe-gif-shader.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script src="../static/js/screenshot.js"></script>
+  </head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: ../static/mindar-target/5/targets.prod.mind; uiScanning:no; maxTrack:5"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      color-space="sRGB"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <img src="../static/gifs/flutter.gif" id="flutterModel">
+        <img src="../static/gifs/firebase.gif" id="firebaseModel">
+        <img src="../static/gifs/gdg.gif" id="gdgModel">
+        <img src="../static/gifs/io.gif" id="ioModel">
+        <img src="../static/gifs/random.gif" id="randomModel">
+      </a-assets>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity
+          geometry="primitive:plane"
+          material="shader:gif;src:#flutterModel;"
+          position="0.15 -0.15 1"
+          scale="0.1 0.1 0.1"
+        ></a-entity>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-entity
+          geometry="primitive:plane"
+          material="shader:gif;src:#firebaseModel;"
+          position="-0.15 -0.075 1"
+          scale="0.1 0.1 0.1"
+        ></a-entity>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-entity
+          geometry="primitive:plane"
+          material="shader:gif;src:#gdgModel;"
+          position="0.075 0.2 1"
+          scale="0.1 0.1 0.1"
+        ></a-entity>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-entity
+          geometry="primitive:plane"
+          material="shader:gif;src:#ioModel;"
+          position="-0.15 -0.15 1"
+          scale="0.1 0.1 0.1"
+        ></a-entity>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 4">
+        <a-entity
+          geometry="primitive:plane"
+          material="shader:gif;src:#randomModel;"
+          position="-0.075 0.2 1"
+          scale="0.1 0.1 0.1"
+        ></a-entity>
+      </a-entity>
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    </a-scene>
+    <button id="screenshot" onclick="takeScreenshot()"></button>
+  </body>
+</html>
