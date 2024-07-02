@@ -1,26 +1,34 @@
-const RESOLUTION_SCALE = 3;
+const RESOLUTION_SCALE = 4;
 
 function takeScreenshot() {
   const video = document.querySelector("video");
   const canvas = document.createElement("canvas");
 
+  video.pause();
+
   let vWidth = video.clientWidth * RESOLUTION_SCALE;
   let vHeight = video.clientHeight * RESOLUTION_SCALE;
 
-  canvas.width = vWidth;
-  canvas.height = vHeight;
+  const style = window.getComputedStyle(video);
+  const top = parseFloat(style.getPropertyValue("top"));
+  const left = parseFloat(style.getPropertyValue("left"));
+  const width = parseFloat(style.getPropertyValue("width"));
+  const height = parseFloat(style.getPropertyValue("height"));
 
-  const element = document.querySelector("video");
-  const style = window.getComputedStyle(element);
-  const top = style.getPropertyValue("top");
+  const imgLeft = left * vWidth / width;
+  const imgTop = top * vHeight / height;
+  const drawLeft = imgLeft > 0 ? 0 : imgLeft;
+  const drawTop = imgTop > 0 ? 0: imgTop;
+  const drawWidth = vWidth;
+  const drawHeight = vHeight;
 
-  canvas.getContext("2d").drawImage(video, 0, parseFloat(top), vWidth, vHeight);
+  canvas.width = vWidth + imgLeft * 2;
+  canvas.height = vHeight + imgTop * 2;
 
-  const imgData = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
-
-  canvas.getContext("2d").drawImage(imgData, 0, 0, vWidth, vHeight);
+  canvas.getContext("2d").drawImage(video, drawLeft, drawTop, drawWidth, drawHeight);
 
   downloadScreenshot(canvas);
+  video.play();
 }
 
 function downloadScreenshot(canvas) {
@@ -38,14 +46,3 @@ function getUUID() {
   const uuid = window.crypto.randomUUID();
   return uuid.split("-")[0] ?? uuid;
 }
-
-// function formatDate(date) {
-//   return new Intl.DateTimeFormat("vi-VN", {
-//     year: "numeric",
-//     month: "2-digit",
-//     day: "2-digit",
-//     hour: "2-digit",
-//     minute: "2-digit",
-//     second: "2-digit",
-//   }).format(date);
-// }
