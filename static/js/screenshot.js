@@ -27,6 +27,9 @@ function takeScreenshot() {
 
   canvas.getContext("2d").drawImage(video, drawLeft, drawTop, drawWidth, drawHeight);
 
+  const imgData = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
+  canvas.getContext("2d").drawImage(imgData, 0, 0, drawWidth, drawHeight);
+
   downloadScreenshot(canvas);
   video.play();
 }
